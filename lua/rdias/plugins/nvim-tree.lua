@@ -13,11 +13,18 @@ return {
 
     nvimtree.setup({
       view = {
-        width = 60,
+        width = 40,
       },
       filters = {
         dotfiles = true,
       },
     })
+
+    local keymap = vim.keymap
+
+    keymap.set("n", "<leader>ee", "<cmd>NvimTreeToggle<CR>")
+    keymap.set("n", "<leader>ef", "<cmd>NvimTreeFindFileToggle<CR>")
+    keymap.set("n", "<leader>ec", "<cmd>NvimTreeCollapse<CR>")
+    keymap.set("n", "<leader>er", "<cmd>NvimTreeRefresh<CR>")
   end
 }

@@ -13,4 +13,7 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup("rdias.plugins")
+require("lazy").setup({
+  {import = "rdias.plugins"},
+  {import = "rdias.plugins.lsp"}
+})

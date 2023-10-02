@@ -1,3 +1,6 @@
+
+vim.g.nightflyTransparent = true
+
 vim.g.mapleader = ' '
 
 vim.g.markdown_fenced_languages = {"html", "javascript", "typescript", "css", "scss", "lua", "java"}
@@ -68,4 +71,8 @@ end
 if is_linux then
   vim.opt.clipboard:append { "unnamedplus" }
 end
+
+vim.keymap.set('n', 'te', ':tabedit<Return>')
+vim.keymap.set('n', 'ss', ':split<Return><C-w>w')
+vim.keymap.set('n', 'sv', ':vsplit<Return><C-w>w')
 
