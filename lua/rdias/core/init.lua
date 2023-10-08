@@ -76,3 +76,4 @@ vim.keymap.set('n', 'te', ':tabedit<Return>')
 vim.keymap.set('n', 'ss', ':split<Return><C-w>w')
 vim.keymap.set('n', 'sv', ':vsplit<Return><C-w>w')
 
+-- require('rdias.core.keybindings')
