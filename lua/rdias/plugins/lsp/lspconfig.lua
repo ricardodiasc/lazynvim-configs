@@ -85,6 +85,7 @@ return {
     lspconfig["emmet_ls"].setup({
       capabilities = capabilities,
       on_attach = on_attach,
+      filetypes = { "html", "typecriptreact", "javascriptreact", "css", "sass", "less" }
     })
 
     lspconfig["lua_ls"].setup({
@@ -108,6 +109,7 @@ return {
     lspconfig["graphql"].setup({
       capabilities = capabilities,
       on_attach = on_attach,
+      filetypes = { "graphql", "gql" }
     })
 
     lspconfig["jdtls"].setup({
