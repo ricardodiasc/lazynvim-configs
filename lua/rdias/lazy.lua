@@ -17,6 +17,7 @@ require("lazy").setup({{import = "rdias.plugins"},{import = "rdias.plugins.lsp"}
   {
     install = {
       colorscheme = {"nightfly"},
+
     },
     checker = {
       enabled = true,
