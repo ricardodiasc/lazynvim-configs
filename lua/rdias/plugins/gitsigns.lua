@@ -4,13 +4,13 @@ return {
   config = function ()
     local gitsigns = require("gitsigns")
 
-    gitsigns.setup({{
+    gitsigns.setup({
       current_line_blame = true,
       current_line_blame_opts = {
-        delay = 1000,
+        delay = 100,
         virt_text_pos = "eol",
       },
-      current_line_blame_formatter = '\t\t<author> • <date> • <summary>',
-    }})
+      current_line_blame_formatter = '\t\t<author> • <author_time:%Y-%m-%d> • <summary>',
+    })
   end
 }
