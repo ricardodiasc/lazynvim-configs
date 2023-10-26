@@ -19,30 +19,23 @@ return {
     local on_attach = function (_client, bufnr)
       opts.buffer = bufnr
       opts.desc = "Show LSP declaration"
-      keymap.nnoremap("<leader>lD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
+      keymap.set("n", "lsp<leader>lD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
       opts.desc = "Show declaration location."
-      keymap.nnoremap("<leader>lD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
+      keymap.set("n","<leader>lD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
       opts.desc = "Show definitions."
-      keymap.nnoremap("<leader>ld", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
+      keymap.set("n","<leader>ld", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
       opts.desc = "Show documentations."
-      keymap.nnoremap("<leader>lk", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
+      keymap.set("n","<leader>lk", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
       opts.desc = "Show implementations of the type."
-      keymap.nnoremap("<leader>li", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
+      keymap.set("n","<leader>li", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
       opts.desc = "Show signature help."
-      keymap.nnoremap("<leader>ls", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
+      keymap.set("n","<leader>ls", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
       opts.desc = "Show type definition."
-      keymap.nnoremap("<leader>lt", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
+      keymap.set("n","<leader>lt", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
       opts.desc = "Rename."
-      keymap.nnoremap("<leader>lr", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+      keymap.set("n","<leader>lr", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
       opts.desc = "Show code actions."
-      keymap.nnoremap("<leader>la", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-      opts.desc = "Show references"
-      keymap.nnoremap("<leader>lR", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-      keymap.nnoremap("<leader>lE", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts)
-      keymap.nnoremap("<leader>l[", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
-      keymap.nnoremap("<leader>l]", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
-      keymap.nnoremap("<leader>lq", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", opts)
-      keymap.nnoremap("<leader>lf", "<cmd>lua vim.lsp.buf.format()<CR>", opts)
+      keymap.set("n","<leader>la", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
     end
 
     -- Enable autocompletion
@@ -93,14 +86,18 @@ return {
       on_attach = on_attach,
       settings = {
         Lua = {
+          runtime = {
+            version = 'LuaJIT'
+          },
           diagnostics = {
             globals = { "vim" },
           },
           workspace = {
-            library = {
-              [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-              [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
-            },
+            library = vim.api.nvim_get_runtime_file("",true),
+            checkThirdParty = false
+          },
+          telemetry = {
+            enable = true
           }
         },
       },
