@@ -29,5 +29,6 @@ return {
     keymap.set("n", "<leader><leader>", "<cmd>Telescope buffers<cr>")
     keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>")
     keymap.set("n", "<leader>fc", "<cmd>Telescope commands<cr>")
+    keymap.set("n", "<Leader>fb", "<cmd>Telescope git_branches<cr>")
   end
 }

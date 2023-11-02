@@ -7,6 +7,17 @@ return {
   dependencies = {
     "hrsh7th/cmp-nvim-lsp",
     {"antosha417/nvim-lsp-file-operations", config = true },
+    "mfussenegger/nvim-jdtls"
+  },
+  opts = {
+    servers = {
+      jdtls = {},
+   },
+  },
+  setup = {
+    jdtls = function ()
+      return true
+    end
   },
   config = function ()
     local lspconfig = require("lspconfig")
@@ -63,6 +74,8 @@ return {
     lspconfig["tsserver"].setup({
       capabilities = capabilities,
       on_attach = on_attach,
+      filetypes = { "typescript", "typescriptreact", "typescript.tsc" },
+      cmd = { "typescript-language-server", "--stdio" },
     })
 
     lspconfig["cssls"].setup({
@@ -109,11 +122,6 @@ return {
       filetypes = { "graphql", "gql" }
     })
 
-    lspconfig["jdtls"].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-    })
-
     lspconfig["jsonls"].setup({
       capabilities = capabilities,
       on_attach = on_attach,
@@ -136,6 +144,19 @@ return {
       },
     })
 
+    lspconfig["dockerls"].setup({
+      capabilities = capabilities,
+      on_attach = on_attach,
+    })
+
+    lspconfig["jdtls"].setup({
+      capabilities = capabilities,
+      on_attach = on_attach,
+      filetypes = { "java" },
+      root_dir = function(fname)
+        return lspconfig.util.root_pattern("pom.xml", "gradle.build", ".git")(fname) or vim.fn.getcwd()
+      end,
+    })
 
   end
 }

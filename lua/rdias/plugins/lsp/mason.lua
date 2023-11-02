@@ -3,6 +3,12 @@ return {
   dependencies = {
     "williamboman/mason-lspconfig.nvim",
   },
+  opts = function(_, opts)
+    opts.ensure_installed = opts.ensure_installed or {}
+    vim.list_extend(opts.ensure_installed, {
+      "java-test", "java-debug-adapter"
+    })
+  end,
   config = function()
     local mason = require("mason")
     local mason_lspconfig = require("mason-lspconfig")
@@ -27,6 +33,7 @@ return {
         "graphql",
         "tsserver",
         "jdtls",
+        "marksman"
       },
       automatic_installation = true,
     })
