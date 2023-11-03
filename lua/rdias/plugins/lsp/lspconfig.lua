@@ -149,14 +149,14 @@ return {
       on_attach = on_attach,
     })
 
-    lspconfig["jdtls"].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-      filetypes = { "java" },
-      root_dir = function(fname)
-        return lspconfig.util.root_pattern("pom.xml", "gradle.build", ".git")(fname) or vim.fn.getcwd()
-      end,
-    })
+    -- lspconfig["jdtls"].setup({
+    --   capabilities = capabilities,
+    --   on_attach = on_attach,
+    --   filetypes = { "java" },
+    --   root_dir = function(fname)
+    --     return lspconfig.util.root_pattern("pom.xml", "gradle.build", ".git")(fname) or vim.fn.getcwd()
+    --   end,
+    -- })
 
   end
 }
