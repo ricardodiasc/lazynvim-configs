@@ -7,17 +7,6 @@ return {
   dependencies = {
     "hrsh7th/cmp-nvim-lsp",
     {"antosha417/nvim-lsp-file-operations", config = true },
-    "mfussenegger/nvim-jdtls"
-  },
-  opts = {
-    servers = {
-      jdtls = {},
-   },
-  },
-  setup = {
-    jdtls = function ()
-      return true
-    end
   },
   config = function ()
     local lspconfig = require("lspconfig")

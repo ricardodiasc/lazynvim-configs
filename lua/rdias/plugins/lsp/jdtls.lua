@@ -1,5 +1,11 @@
 return {
   "mfussenegger/nvim-jdtls",
+  ft = { "java" },
+  dependencies = {
+    "mfussenegger/nvim-dap",
+    "nvim/nvim-lspconfig",
+  },
+  event = { "BufReadPre", "BufNewFile"  },
   config = function()
     local jdtls = require("jdtls")
 
@@ -72,7 +78,7 @@ return {
                 },
                 {
                   name = "JavaSE-17",
-                  path = HOME .. "/.sdkman/candidates/java/17.0.7-tem",
+                  path = HOME .. "/.sdkman/candidates/java/17.0.8.1-tem",
                 },
                 {
                   name = "JavaSE-19",
@@ -146,9 +152,33 @@ return {
 
 
       config['on_attach'] = function(client, bufrn)
-        require('jdtls').setup_dap({ hotcodereplace = 'auto' })
-      end
+        local keymap = vim.keymap
 
+        local opts = { noremap = true, silent = true }
+
+
+        opts.buffer = bufrn
+        opts.desc = "Show LSP declaration"
+        keymap.set("n", "lsp<leader>lD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
+        opts.desc = "Show declaration location."
+        keymap.set("n", "<leader>lD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
+        opts.desc = "Show definitions."
+        keymap.set("n", "<leader>ld", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
+        opts.desc = "Show documentations."
+        keymap.set("n", "<leader>lk", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
+        opts.desc = "Show implementations of the type."
+        keymap.set("n", "<leader>li", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
+        opts.desc = "Show signature help."
+        keymap.set("n", "<leader>ls", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
+        opts.desc = "Show type definition."
+        keymap.set("n", "<leader>lt", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
+        opts.desc = "Rename."
+        keymap.set("n", "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+        opts.desc = "Show code actions."
+        keymap.set("n", "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+
+        -- require('jdtls').setup_dap({ hotcodereplace = 'auto' })
+      end
 
       -- Existing server will be reused if the root_dir matches.
       jdtls.start_or_attach(config)
