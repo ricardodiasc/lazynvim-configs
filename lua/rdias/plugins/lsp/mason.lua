@@ -33,7 +33,12 @@ return {
         "graphql",
         "tsserver",
         "jdtls",
-        "marksman"
+        "marksman",
+        "angularls",
+        "jsonls",
+        "yamlls",
+        "dockerls",
+        "docker_compose_language_service"
       },
       automatic_installation = true,
     })
