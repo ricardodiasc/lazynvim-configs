@@ -5,7 +5,6 @@ return {
     "mfussenegger/nvim-dap",
     "nvim/nvim-lspconfig",
   },
-  event = { "BufReadPre", "BufNewFile"  },
   config = function()
     local jdtls = require("jdtls")
 
