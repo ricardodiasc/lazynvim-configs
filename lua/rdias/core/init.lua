@@ -5,7 +5,6 @@ vim.g.mapleader = ' '
 
 vim.g.markdown_fenced_languages = {"html", "javascript", "typescript", "css", "scss", "lua", "java"}
 
-
 vim.cmd("autocmd!")
 
 vim.scriptencoding = 'utf-8'
