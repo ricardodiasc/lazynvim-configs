@@ -1,10 +1,18 @@
 return {
   "akinsho/nvim-toggleterm.lua",
-
   config = function()
-    vim.api.nvim_set_keymap("n", "<leader>gg", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true})
-    vim.api.nvim_set_keymap("n", "<leader>t", "<cmd>ToggleTerm size=10 direction=horizontal<CR>", {noremap = true, silent = true})
-    vim.api.nvim_set_keymap("n", "<leader>T", "<cmd>ToggleTerm direction=float<CR>", {noremap = true, silent = true}) 
+    vim.api.nvim_set_keymap("n", "<leader>gg", "<cmd>lua _lazygit_toggle()<CR>", { noremap = true, silent = true })
+    vim.api.nvim_set_keymap("n", "<leader>t", "<cmd>ToggleTerm size=10 direction=horizontal<CR>",
+      { noremap = true, silent = true })
+    vim.api.nvim_set_keymap("n", "<leader>T", "<cmd>ToggleTerm direction=float<CR>", { noremap = true, silent = true })
+
+    local Terminal = require("toggleterm.terminal").Terminal;
+    local lazygit = Terminal:new({ cmd = "lazygit", direction = "float", hidden = true })
+
+    function _lazygit_toggle()
+      lazygit:toggle()
+    end
+
     require("toggleterm").setup {
       size = 12,
       open_mapping = [[<c-t>]],
