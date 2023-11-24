@@ -12,10 +12,14 @@ return {
     vim.cmd([[ highlight NvimTreeIndentMarker guifg=#3FC5FF ]])
 
     nvimtree.setup({
+      sort_by = "case_sensitive",
       view = {
         width = 40,
       },
-      filters = {
+      renderer = {
+        group_empty = true,
+      },
+       filters = {
         dotfiles = true,
       },
     })
