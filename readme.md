@@ -1,5 +1,6 @@
 # Ricardo Dias Lazy Nvim configs
 
-I am just trying to finish one setup using Lazy....
+This is my personal Neovim config with some of the languages that I use. 
+Java still to be completed.
 
-Still not complete.
+WIP.
