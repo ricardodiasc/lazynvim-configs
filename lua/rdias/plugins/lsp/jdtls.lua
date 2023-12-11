@@ -1,8 +1,13 @@
+
+
+
+
 return {
   "mfussenegger/nvim-jdtls",
   ft = { "java" },
   dependencies = {
     "mfussenegger/nvim-dap",
+    "rcarriga/nvim-dap-ui",
     "nvim/nvim-lspconfig",
     "nvim-treesitter/nvim-treesitter"
   },
@@ -78,7 +83,7 @@ return {
                 },
                 {
                   name = "JavaSE-17",
-                  path = HOME .. "/.sdkman/candidates/java/17.0.8.1-tem",
+                  path = HOME .. "/.sdkman/candidates/java/17.0.9-tem",
                 },
                 {
                   name = "JavaSE-19",
@@ -176,6 +181,8 @@ return {
         keymap.set("n", "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
         opts.desc = "Show code actions."
         keymap.set("n", "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+        opts.desc = "Format code"
+        keymap.set("n", "<leader>lf", "<cmd>lua vim.lsp.buf.format()<CR>", opts)
 
         require('jdtls').setup_dap({ hotcodereplace = 'auto' })
       end
