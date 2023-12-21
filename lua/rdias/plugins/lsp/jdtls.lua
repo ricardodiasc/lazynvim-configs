@@ -1,7 +1,3 @@
-
-
-
-
 return {
   "mfussenegger/nvim-jdtls",
   ft = { "java" },
@@ -17,6 +13,8 @@ return {
     local function attach_jdtls()
       local JDTLS_LOCATION = vim.fn.stdpath "data" .. "/mason/packages/jdtls"
       local JAVA_DAP_LOCATION = vim.fn.stdpath "data" .. "/mason/packages/java-debug-adapter/extension/server/"
+      local JAVA_TEST_LOCATION = vim.fn.stdpath "data" .. "/mason/packages/java-test/extension/server/"
+
 
       local HOME = os.getenv("HOME")
       local LOMBOK_PATH = JDTLS_LOCATION .. '/lombok.jar'
@@ -92,6 +90,10 @@ return {
                 {
                   name = "JavaSE-20",
                   path = HOME .. "/.sdkman/candidates/java/20-tem",
+                },
+                {
+                  name = "JavaSE-21",
+                  path = HOME .. "/.sdkman/candidates/java/21-tem",
                 }
               }
             },
@@ -148,11 +150,22 @@ return {
           allow_incremental_sync = true,
         },
 
-        init_options = {
-          bundles = {
-            vim.fn.glob(JAVA_DAP_LOCATION .. "com.microsoft.java.debug.plugin-*.jar", 0)
-          },
-        },
+        -- init_options = {
+        --   bundles = {
+        --     vim.fn.glob(JAVA_DAP_LOCATION .. "com.microsoft.java.debug.plugin-*.jar", 1)
+        --   },
+        -- },
+      }
+
+      -- local JAVA_DAP_LOCATION = vim.fn.stdpath "data" .. "/mason/packages/java-debug-adapter/extension/server/"
+      local bundles = {
+        vim.fn.glob(JAVA_DAP_LOCATION .. "com.microsoft.java.debug.plugin-*.jar", 1)
+      } 
+
+      vim.list_extend(bundles, vim.split(vim.fn.glob("/home/ricardo/.local/share/lazynvim/mason/packages/java-test/extension/server/*.jar", 1), "\n"))
+
+      config["init_options"] = {
+        bundles = bundles;
       }
 
 
