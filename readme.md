@@ -9,8 +9,7 @@ WIP.
 
 ### Angular LSP not starting up
 
-If the Angular LSP is not starting from a specific project, check the typescript and angular version. 
-The Mason installation always pulls the lattest version and sometimes the project will not be compatible with newer Angular/Typescript.
+If the Angular LSP is not starting from a specific project, check the typescript and angular version. The Mason installation always pulls the latest version and sometimes the project will not be compatible with newer Angular/Typescript.
 
 * Solution
 
@@ -42,6 +41,7 @@ npm run build-plugin
 ```
 Go up and make a copy of the original extension folder mv extension extension-bkp
 Create a symbolic link to the cloned repo:
+
 
 ```shell
 ln -s ./vscode-java-test extension
