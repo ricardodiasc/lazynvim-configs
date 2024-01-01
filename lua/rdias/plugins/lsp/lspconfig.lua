@@ -44,7 +44,6 @@ return {
       keymap.set("n","<leader>ln", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
       opts.desc = "Format code." 
       keymap.set("n","<leader>lf", "<cmd>lua vim.lsp.buf.format()<CR>", opts)
-
     end
 
     -- Enable autocompletion

@@ -5,7 +5,10 @@ return {
     "mfussenegger/nvim-dap",
     "rcarriga/nvim-dap-ui",
     "nvim/nvim-lspconfig",
-    "nvim-treesitter/nvim-treesitter"
+    "nvim-treesitter/nvim-treesitter",
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    "nvim-telescope/telescope-dap.nvim",
+    "nvim-telescope/telescope-file-browser.nvim"
   },
   config = function()
     local jdtls = require("jdtls")
@@ -14,7 +17,6 @@ return {
       local JDTLS_LOCATION = vim.fn.stdpath "data" .. "/mason/packages/jdtls"
       local JAVA_DAP_LOCATION = vim.fn.stdpath "data" .. "/mason/packages/java-debug-adapter/extension/server/"
       local JAVA_TEST_LOCATION = vim.fn.stdpath "data" .. "/mason/packages/java-test/extension/server/"
-
 
       local HOME = os.getenv("HOME")
       local LOMBOK_PATH = JDTLS_LOCATION .. '/lombok.jar'
@@ -263,40 +265,8 @@ return {
       keymap.set('n', '<Leader>dl', ':lua require"dap".set_breakpoint(nil, nil, vim.fn.input("Log: "))<CR>')
       keymap.set('n', '<Leader>dr', ':lua require"dap".repl.open()<CR>')
 
-
-
-      local utils = require('rdias/utils')
-
-
-      function get_test_runner(test_name, debug)
-        if debug then
-          return './gradlew test --debug-jvm --tests "' .. test_name .. '"'
-        end
-
-        return './gradlew test --tests "' .. test_name .. '"'
-      end
-
-      function run_java_test_method(debug)
-        -- local utils = require('rdias/utils')
-        local method_name = utils.get_current_full_method_name()
-        -- print(get_test_runner(method_name, false))
-        -- vim.cmd('term ' .. get_test_runner(method_name, debug) )
-
-        vim.cmd("TermExec cmd='" .. get_test_runner(method_name, debug) .. "' ")
-      end
-
-      local function run_java_test_class(debug)
-        -- local utils = require 'user/utils'
-        local class_name = utils.get_current_full_class_name()
-        -- vim.cmd('term ' .. get_test_runner(class_name, debug))
-
-        vim.cmd("TermExec cmd='" .. get_test_runner(class_name, debug) .. "' ")
-      end
-
-      keymap.set('n', '<Leader>jtm', function() run_java_test_method(false) end)
-      keymap.set('n', '<Leader>jTM', function() run_java_test_method(true) end)
-      keymap.set('n', '<Leader>jtc', function() run_java_test_class(false) end)
-      keymap.set('n', '<Leader>jTC', function() run_java_test_class(true) end)
+      keymap.set('n', '<Leader>jtm', ':lua require("jdtls").test_nearest_method()<CR>')
+      keymap.set('n', '<Leader>jtc', ':lua require("jdtls").test_class()<CR>')
 
       -- Nvtree
       keymap.set('n', '<Leader>e', '<cmd>NvimTreeFindFileToggle<CR>')
@@ -304,13 +274,6 @@ return {
 
       -- Git
       keymap.set('n', '<Leader>gb', '<cmd>Gitsigns toggle_current_line_blame<CR>')
-
-
-      -- Trouble
-      keymap.set('n', '<Leader>xt', '<cmd>TroubleToggle<CR>')
-      keymap.set('n', '<Leader>xd', '<cmd>TroubleToggle document_diagnostics<CR>')
-      keymap.set('n', '<Leader>xq', '<cmd>TroubleToggle quickfix<CR>')
-      keymap.set('n', 'gR', '<cmd>TroubleToggle lsp_references<CR>')
 
       function show_dap_centered_scopes()
         local widgets = require('dap.ui.widgets')
