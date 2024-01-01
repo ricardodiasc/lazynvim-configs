@@ -18,7 +18,6 @@ return {
       local JAVA_DAP_LOCATION = vim.fn.stdpath "data" .. "/mason/packages/java-debug-adapter/extension/server/"
       local JAVA_TEST_LOCATION = vim.fn.stdpath "data" .. "/mason/packages/java-test/extension/server/"
 
-
       local HOME = os.getenv("HOME")
       local LOMBOK_PATH = JDTLS_LOCATION .. '/lombok.jar'
       local WORKSPACE_PATH = HOME .. "/workspace/java"
@@ -267,9 +266,7 @@ return {
       keymap.set('n', '<Leader>dr', ':lua require"dap".repl.open()<CR>')
 
       keymap.set('n', '<Leader>jtm', ':lua require("jdtls").test_nearest_method()<CR>')
-      keymap.set('n', '<Leader>jTM', ':lua require("jdtls").test_class()<CR>')
       keymap.set('n', '<Leader>jtc', ':lua require("jdtls").test_class()<CR>')
-      -- keymap.set('n', '<Leader>jTC', function() run_java_test_class(true) end)
 
       -- Nvtree
       keymap.set('n', '<Leader>e', '<cmd>NvimTreeFindFileToggle<CR>')
