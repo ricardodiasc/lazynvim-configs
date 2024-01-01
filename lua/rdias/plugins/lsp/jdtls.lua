@@ -164,7 +164,7 @@ return {
         vim.fn.glob(JAVA_DAP_LOCATION .. "com.microsoft.java.debug.plugin-*.jar", 1)
       } 
 
-      vim.list_extend(bundles, vim.split(vim.fn.glob("/home/ricardo/.local/share/lazynvim/mason/packages/java-test/extension/server/*.jar", 1), "\n"))
+      vim.list_extend(bundles, vim.split(vim.fn.glob(JAVA_TEST_LOCATION .. "*.jar", 1), "\n"))
 
       config["init_options"] = {
         bundles = bundles;
@@ -228,6 +228,10 @@ return {
 
       function attach_to_debug()
         local dap = require('dap')
+        local dapui = require('dapui')
+
+        dapui.setup()
+        dapui.open()
 
         dap.configurations.java = {
           {
@@ -254,7 +258,7 @@ return {
 
 
       -- Dap UI Toggle not working yet
-      keymap.set('n', '<Leader>dt', ':DapUiToggle<CR>')
+      keymap.set('n', '<Leader>dt', ":lua require('dapui').toggle()<CR>")
       keymap.set('n', '<F5>', ':lua require"dap".continue()<CR>')
       keymap.set('n', '<F6>', ':lua require"dap".step_over()<CR>')
       keymap.set('n', '<F7>', ':lua require"dap".step_into()<CR>')
