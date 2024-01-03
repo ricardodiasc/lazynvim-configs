@@ -244,10 +244,12 @@ return {
         }
         dap.continue()
       end
+
       local keymap = vim.keymap
 
       keymap.set('n', '<Leader>da', ':lua attach_to_debug()<CR>')
-
+      keymap.set('n', '<Leader>ds', ':lua run_spring_boot(true)<CR>')
+      keymap.set('n', '<Leader>du', ':lua require("dapui").toggle()<CR>')
       keymap.set('n', '<Leader>joi', ':lua require("jdtls").organize_imports()<CR>')
       keymap.set('n', '<Leader>jc', ':lua require("jdtls").compile("incremental")<CR>')
       keymap.set('n', '<Leader>jsr', function() run_spring_boot() end)
