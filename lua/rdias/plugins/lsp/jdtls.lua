@@ -257,10 +257,7 @@ return {
       keymap.set('n', '<F9>', function() run_spring_boot(false) end)
       keymap.set('n', '<F10>', function() run_spring_boot(true) end)
 
-
-
       -- Dap UI Toggle not working yet
-      keymap.set('n', '<Leader>dt', ":lua require('dapui').toggle()<CR>")
       keymap.set('n', '<F5>', ':lua require"dap".continue()<CR>')
       keymap.set('n', '<F6>', ':lua require"dap".step_over()<CR>')
       keymap.set('n', '<F7>', ':lua require"dap".step_into()<CR>')
