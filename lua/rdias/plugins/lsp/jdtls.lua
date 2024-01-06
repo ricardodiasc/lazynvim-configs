@@ -8,7 +8,8 @@ return {
     "nvim-treesitter/nvim-treesitter",
     "nvim-treesitter/nvim-treesitter-textobjects",
     "nvim-telescope/telescope-dap.nvim",
-    "nvim-telescope/telescope-file-browser.nvim"
+    "nvim-telescope/telescope-file-browser.nvim",
+    "theHamsta/nvim-dap-virtual-text"
   },
   config = function()
     local jdtls = require("jdtls")
