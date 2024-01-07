@@ -39,7 +39,11 @@ return {
         "java",
         "rust",
         "cpp",
-        "c"
+        "c",
+        "help",
+        "vim",
+        "cmake",
+        "vimdoc"
       },
       incremental_selection = {
         enable = true,
