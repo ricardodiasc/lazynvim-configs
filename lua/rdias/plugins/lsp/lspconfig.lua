@@ -38,12 +38,14 @@ return {
       keymap.set("n","<leader>la", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
       opts.desc = "Show references."
       keymap.set("n","<leader>lr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-      opts.desc = "Show diagnostics." 
-      keymap.set("n","<leader>ld", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>", opts)
       opts.desc = "Go to next diagnostic."
       keymap.set("n","<leader>ln", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
       opts.desc = "Format code." 
       keymap.set("n","<leader>lf", "<cmd>lua vim.lsp.buf.format()<CR>", opts)
+
+      opts.desc = "Show LSP declaration"
+      keymap.set("n", "<leader>ld", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
+ 
     end
 
     -- Enable autocompletion

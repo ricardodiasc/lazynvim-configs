@@ -180,11 +180,7 @@ return {
 
         opts.buffer = bufrn
         opts.desc = "Show LSP declaration"
-        keymap.set("n", "lsp<leader>lD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-        opts.desc = "Show declaration location."
-        keymap.set("n", "<leader>lD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-        opts.desc = "Show definitions."
-        keymap.set("n", "<leader>ld", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
+        keymap.set("n", "<leader>ld", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
         opts.desc = "Show documentations."
         keymap.set("n", "<leader>lk", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
         opts.desc = "Show implementations of the type."
