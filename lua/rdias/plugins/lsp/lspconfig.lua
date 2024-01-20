@@ -40,12 +40,11 @@ return {
       keymap.set("n","<leader>lr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
       opts.desc = "Go to next diagnostic."
       keymap.set("n","<leader>ln", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
-      opts.desc = "Format code." 
+      opts.desc = "Format code."
       keymap.set("n","<leader>lf", "<cmd>lua vim.lsp.buf.format()<CR>", opts)
 
       opts.desc = "Show LSP declaration"
       keymap.set("n", "<leader>ld", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
- 
     end
 
     -- Enable autocompletion
@@ -149,6 +148,12 @@ return {
     })
 
     lspconfig["angularls"].setup({
+      capabilities = capabilities,
+      on_attach = on_attach,
+    })
+
+
+    lspconfig["terraformls"].setup({
       capabilities = capabilities,
       on_attach = on_attach,
     })

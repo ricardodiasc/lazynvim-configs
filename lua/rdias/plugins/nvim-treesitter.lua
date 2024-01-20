@@ -43,7 +43,9 @@ return {
         "help",
         "vim",
         "cmake",
-        "vimdoc"
+        "vimdoc",
+        "hcl",
+        "terraform"
       },
       incremental_selection = {
         enable = true,

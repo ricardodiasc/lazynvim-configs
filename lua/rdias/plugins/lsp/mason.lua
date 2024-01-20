@@ -38,7 +38,8 @@ return {
         "jsonls",
         "yamlls",
         "dockerls",
-        "docker_compose_language_service"
+        "docker_compose_language_service",
+        "terraformls"
       },
       automatic_installation = true,
     })
