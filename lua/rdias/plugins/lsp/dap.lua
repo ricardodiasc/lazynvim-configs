@@ -6,7 +6,7 @@ return {
   opts = {
   },
   keys = {
-    { 
+    {
       "<Leader>du",
       function ()
         require("dapui").toggle()
