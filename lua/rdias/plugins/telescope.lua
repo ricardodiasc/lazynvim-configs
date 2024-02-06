@@ -26,7 +26,7 @@ return {
     keymap.set("n", ";f", "<cmd>Telescope find_files<cr>")
     keymap.set("n", ";g", "<cmd>Telescope live_grep<cr>")
 
-    keymap.set("n", "leader>ff", "<cmd>Telescope find_files<cr>")
+    keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>")
     keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>")
     keymap.set("n", "<leader><leader>", "<cmd>Telescope buffers<cr>")
     keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>")
