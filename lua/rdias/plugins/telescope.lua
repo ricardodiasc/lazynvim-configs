@@ -4,18 +4,24 @@ return {
   requires = {
     "nvim-lua/plenary.nvim",
     "nvim-tree/nvim-web-devicons",
-    { "nvim-telescope/telescope-fzf-native.nvim" , build = "make" }
+    { "nvim-telescope/telescope-fzf-native.nvim" , build = "make" },
+    "folke/trouble.nvim"
   },
   config = function()
     local telescope = require("telescope")
     local actions = require("telescope.actions")
+    local trouble = require("trouble.providers.telescope")
 
     telescope.setup {
       defaults = {
         mappings = {
           i = {
             ["<esc>"] = actions.close,
+            ["<c-l>"] = trouble.open_with_trouble
           },
+          n = {
+            ["<c-l>"] = trouble.open_with_trouble
+          }
         },
       },
     }

@@ -5,8 +5,6 @@ return {
     "mfussenegger/nvim-dap",
     "rcarriga/nvim-dap-ui",
     "nvim/nvim-lspconfig",
-    "nvim-treesitter/nvim-treesitter",
-    "nvim-treesitter/nvim-treesitter-textobjects",
     "nvim-telescope/telescope-dap.nvim",
     "nvim-telescope/telescope-file-browser.nvim",
     "theHamsta/nvim-dap-virtual-text"
