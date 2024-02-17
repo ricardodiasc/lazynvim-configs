@@ -267,10 +267,6 @@ return {
       keymap.set('n', '<Leader>jtm', ':lua require("jdtls").test_nearest_method()<CR>')
       keymap.set('n', '<Leader>jtc', ':lua require("jdtls").test_class()<CR>')
 
-      -- Nvtree
-      keymap.set('n', '<Leader>e', '<cmd>NvimTreeFindFileToggle<CR>')
-
-
       -- Git
       keymap.set('n', '<Leader>gb', '<cmd>Gitsigns toggle_current_line_blame<CR>')
 
