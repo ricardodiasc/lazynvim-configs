@@ -1,7 +1,7 @@
 return {
   "David-Kunz/gen.nvim",
   opts = {
-    model = "codellama",
+    model = "deepseek-coder:6.7b",
     display_mode = 'float',
     show_prompt = false,
     show_model = false,
