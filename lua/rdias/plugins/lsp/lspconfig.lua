@@ -31,7 +31,7 @@ return {
       opts.desc = "Show signature help."
       keymap.set("n","<leader>ls", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
       opts.desc = "Show type definition."
-      keymap.set("n","<leader>lt", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
+      keymap.set("n","<leader>lt", "<cmd>lua vi.lsp.buf.type_definition()<CR>", opts)
       opts.desc = "Rename."
       keymap.set("n","<leader>lr", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
       opts.desc = "Show code actions."
