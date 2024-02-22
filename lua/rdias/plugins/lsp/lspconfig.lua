@@ -37,7 +37,7 @@ return {
       opts.desc = "Show code actions."
       keymap.set("n","<leader>la", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
       opts.desc = "Show references."
-      keymap.set("n","<leader>lr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
+      keymap.set("n","<leader>lq", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
       opts.desc = "Go to next diagnostic."
       keymap.set("n","<leader>ln", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
       opts.desc = "Format code."

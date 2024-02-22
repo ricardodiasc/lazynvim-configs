@@ -193,7 +193,9 @@ return {
         keymap.set("n", "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
         opts.desc = "Format code"
         keymap.set("n", "<leader>lf", "<cmd>lua vim.lsp.buf.format()<CR>", opts)
-
+        opts.desc = "Show references."
+        keymap.set("n","<leader>lq", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
+ 
         require('jdtls').setup_dap({ hotcodereplace = 'auto' })
       end
 

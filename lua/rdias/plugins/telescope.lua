@@ -47,6 +47,5 @@ return {
     keymap.set("n", "<Leader>ft", "<cmd>Telescope treesitter<cr>")
     keymap.set("n", "<Leader>fo", "<cmd>Telescope oldfiles<cr>")
     keymap.set("n", "<Leader>fw", "<cmd>Telescope grep_string<cr>")
-    keymap.set("n", "<Leader>fp", "<cmd>Telescope projects<cr>")
   end
 }
