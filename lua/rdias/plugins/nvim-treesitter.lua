@@ -45,7 +45,9 @@ return {
         "cmake",
         "vimdoc",
         "hcl",
-        "terraform"
+        "terraform",
+        "http",
+        "json"
       },
       incremental_selection = {
         enable = true,
