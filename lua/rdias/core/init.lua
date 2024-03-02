@@ -80,5 +80,4 @@ vim.keymap.set('n', '<Tab>', ':tabnext<Return>')
 vim.keymap.set('n', '<Leader>bd', ':bd<Return>')
 
 
-
 -- require('rdias.core.keybindings')
