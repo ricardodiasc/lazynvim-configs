@@ -4,6 +4,7 @@ return {
     { "nvim-lua/plenary.nvim" },
   },
   config = function ()
+
     require("rest-nvim").setup({
        -- Open request results in a horizontal split
       result_split_horizontal = false,
@@ -50,5 +51,11 @@ return {
       yank_dry_run = true,
       search_back = true,
     })
+
+    local keymap = vim.keymap
+    local opts = { noremap = true, silent = true }
+    opts.desc = "Do a rest request on http file"
+    keymap.set("n", "<leader>rq", "<cmd>lua require('rest-nvim').run()<CR>", opts)
+
   end
 }
