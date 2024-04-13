@@ -78,11 +78,11 @@ return {
               runtimes = {
                 {
                   name = "JavaSE-11",
-                  path = HOME .. "/.sdkman/candidates/java/11.0.19-tem",
+                  path = HOME .. "/.sdkman/candidates/java/11.0.22-tem",
                 },
                 {
                   name = "JavaSE-17",
-                  path = HOME .. "/.sdkman/candidates/java/17.0.9-tem",
+                  path = HOME .. "/.sdkman/candidates/java/17.0.10-tem",
                 },
                 {
                   name = "JavaSE-19",
@@ -151,11 +151,6 @@ return {
           allow_incremental_sync = true,
         },
 
-        -- init_options = {
-        --   bundles = {
-        --     vim.fn.glob(JAVA_DAP_LOCATION .. "com.microsoft.java.debug.plugin-*.jar", 1)
-        --   },
-        -- },
       }
 
       -- local JAVA_DAP_LOCATION = vim.fn.stdpath "data" .. "/mason/packages/java-debug-adapter/extension/server/"
@@ -169,8 +164,7 @@ return {
         bundles = bundles;
       }
 
-
-      config['on_attach'] = function(client, bufrn)
+      config['on_attach'] = function(_, bufrn)
         local keymap = vim.keymap
 
         local opts = { noremap = true, silent = true }
@@ -195,7 +189,6 @@ return {
         keymap.set("n", "<leader>lf", "<cmd>lua vim.lsp.buf.format()<CR>", opts)
         opts.desc = "Show references."
         keymap.set("n","<leader>lq", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
- 
         require('jdtls').setup_dap({ hotcodereplace = 'auto' })
       end
 
