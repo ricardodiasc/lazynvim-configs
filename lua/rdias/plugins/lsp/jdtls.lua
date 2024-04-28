@@ -78,7 +78,7 @@ return {
               runtimes = {
                 {
                   name = "JavaSE-11",
-                  path = HOME .. "/.sdkman/candidates/java/11.0.22-tem",
+                  path = HOME .. "/.sdkman/candidates/java/11.0.23-tem",
                 },
                 {
                   name = "JavaSE-17",
