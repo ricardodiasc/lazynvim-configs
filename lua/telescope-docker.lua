@@ -6,14 +6,14 @@ local utils = require('telescope.previewers.utils')
 local actions = require('telescope.actions')
 local action_state = require('telescope.actions.state')
 local log = require('plenary.log'):new {
-  plugin = "telescope-test",
+  plugin = "telescope-docker",
   use_console = true,
 }
 
 local M = {}
 
 
-M.show_options = function(opts)
+M.docker_images = function(opts)
   picker.new(opts, {
     finder = finders.new_async_job {
       command_generator = function()
@@ -51,7 +51,7 @@ M.show_options = function(opts)
 end
 
 -- add command to show options on neovim using lua 
-vim.cmd("command! ShowOptions lua require('telescope-test').show_options({})")
+vim.cmd("command! ShowOptions lua require('telescope-docker').docker_images({})")
 
 
 return M
