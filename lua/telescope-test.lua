@@ -15,18 +15,16 @@ local M = {}
 
 M.show_options = function(opts)
   picker.new(opts, {
-    finder = finders.new_table {
-      results = {
-        {name = "Yes", value = {1,2,3,4}},
-        {name = "No", value = {1,2,3,4}},
-        {name = "Maybe", value = {1,2,3,4}},
-        {name = "Perhaps", value = {1,2,3,4}},
-      },
+    finder = finders.new_async_job {
+      command_generator = function()
+        return { "docker", "images", "--format", "json" }
+      end,
       entry_maker = function(entry)
+        local parsed = vim.json.decode(entry)
         return {
-          value = entry,
-          display = entry.name,
-          ordinal = entry.name,
+          value = parsed,
+          display = parsed.Repository,
+          ordinal = parsed.Repository .. ":" .. parsed.Tag,
         }
       end,
     },
@@ -41,8 +39,10 @@ M.show_options = function(opts)
     attach_mappings = function(prompt_bufnr)
       actions.select_default:replace(function()
         local selection = action_state.get_selected_entry()
-        log.info("Selected entry: ", selection.value.name)
         actions.close(prompt_bufnr)
+        log.info("Selected entry: ", selection.value.Repository)
+        local command = "edit term://docker run -it " .. selection.value.Repository .. ":" .. selection.value.Tag
+        vim.cmd(command)
       end)
       return true
     end,
