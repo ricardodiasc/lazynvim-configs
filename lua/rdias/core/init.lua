@@ -78,7 +78,8 @@ vim.keymap.set('n', 'tc', ':tabclose<Return>')
 vim.keymap.set('n', '<Tab>', ':tabnext<Return>')
 
 vim.keymap.set('n', '<Leader>bd', ':bd<Return>')
-
+vim.keymap.set('n', '<Leader>bn', ':bn<Return>')
+vim.keymap.set('n', '<Leader>bp', ':bp<Return>')
 
 -- require('rdias.core.keybindings')
 
