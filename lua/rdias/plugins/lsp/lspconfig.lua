@@ -19,7 +19,7 @@ return {
     local on_attach = function (_client, bufnr)
       opts.buffer = bufnr
       opts.desc = "Show LSP declaration"
-      keymap.set("n", "lsp<leader>lD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
+      keymap.set("n", "<leader>lD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
       opts.desc = "Show declaration location."
       keymap.set("n","<leader>lD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
       opts.desc = "Show definitions."
