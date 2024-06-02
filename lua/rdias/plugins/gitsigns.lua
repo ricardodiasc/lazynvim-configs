@@ -15,9 +15,6 @@ return {
 
     local keymap = vim.keymap
     local opts = { noremap = true, silent = true }
-    -- keymap.nnoremap({ "<leader>gn", "<cmd>lua require('gitsigns').next_hunk()<CR>" })
-    -- keymap.nnoremap({ "<leader>gp", "<cmd>lua require('gitsigns').prev_hunk()<CR>" })
-    -- keymap.nnoremap({ "<leader>gr", "<cmd>lua require('gitsigns').reset_hunk()<CR>" })
 
     opts.desc = "Go to next hunk."
     keymap.set("n", "<leader>gn", "<cmd>lua require('gitsigns').next_hunk()<CR>", opts)
@@ -25,6 +22,7 @@ return {
     keymap.set("n", "<leader>gp", "<cmd>lua require('gitsigns').prev_hunk()<CR>", opts)
     opts.desc = "Reset hunk."
     keymap.set("n", "<leader>gr", "<cmd>lua require('gitsigns').reset_hunk()<CR>", opts)
+    opts.desc = "Preview hunk."
     keymap.set("n", "<leader>gP", "<cmd>lua require('gitsigns').preview_hunk()<CR>", opts)
   end
 }
