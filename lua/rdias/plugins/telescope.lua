@@ -9,6 +9,7 @@ return {
   },
   config = function()
     local telescope = require("telescope")
+    local source = require("trouble.sources.telescope")
     local actions = require("telescope.actions")
     local trouble = require("trouble.providers.telescope")
 
@@ -17,10 +18,10 @@ return {
         mappings = {
           i = {
             ["<esc>"] = actions.close,
-            ["<c-l>"] = trouble.open_with_trouble
+            ["<c-l>"] = source.open
           },
           n = {
-            ["<c-l>"] = trouble.open_with_trouble
+            ["<c-l>"] = source.open
           }
         },
       },

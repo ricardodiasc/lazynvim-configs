@@ -12,5 +12,11 @@ return {
       },
       current_line_blame_formatter = '\t\t<author> • <author_time:%Y-%m-%d> • <summary>',
     })
+
+    local keymap = vim.keymap
+    keymap.nnoremap({ "<leader>gn", "<cmd>lua require('gitsigns').next_hunk()<CR>" })
+    keymap.nnoremap({ "<leader>gp", "<cmd>lua require('gitsigns').prev_hunk()<CR>" })
+    keymap.nnoremap({ "<leader>gr", "<cmd>lua require('gitsigns').reset_hunk()<CR>" })
+
   end
 }
