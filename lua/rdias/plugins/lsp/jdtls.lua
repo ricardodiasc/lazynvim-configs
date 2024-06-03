@@ -19,7 +19,7 @@ return {
 
       local HOME = os.getenv("HOME")
       local LOMBOK_PATH = JDTLS_LOCATION .. '/lombok.jar'
-      local WORKSPACE_PATH = HOME .. "/workspace/java"
+      local WORKSPACE_PATH = HOME .. "/workspace/temp/"
 
 
       -- Only for Linux and Mac
@@ -29,9 +29,21 @@ return {
       end
 
       local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
-      local workspace_dir = WORKSPACE_PATH .. project_name
+      local split_folder_name = vim.split(vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h"), "/", {trimempty = true})
+
+      -- vim.split(vim.fn.fnamemode(vim.fn.getcwd(), ":p:h"), "/",{trimempty=true} )
+      local project_id = split_folder_name[#split_folder_name-2] .. "/" .. split_folder_name[#split_folder_name-1]
       local root_markers = { ".git", "mvnw", "gradlew", "pom.xml", "build.gradle" }
+
       local root_dir = require("jdtls.setup").find_root(root_markers)
+
+      -- local WORKSPACE_PATH = root_dir .. "/.workspace/"
+      local workspace_dir = WORKSPACE_PATH .. "/" .. project_id .. "/" .. project_name
+
+      -- create the folder if .project does not exists
+      if not vim.fn.isdirectory(workspace_dir) then
+        vim.fn.mkdir(workspace_dir, "p")
+      end
 
       if root_dir == "" then
         print("Debug propose: Java root not found")
