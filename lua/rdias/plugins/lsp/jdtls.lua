@@ -32,7 +32,12 @@ return {
       local split_folder_name = vim.split(vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h"), "/", {trimempty = true})
 
       -- vim.split(vim.fn.fnamemode(vim.fn.getcwd(), ":p:h"), "/",{trimempty=true} )
+      if #split_folder_name < 3 then
+        print("Debug propose: Java root not found")
+        return
+      end
       local project_id = split_folder_name[#split_folder_name-2] .. "/" .. split_folder_name[#split_folder_name-1]
+
       local root_markers = { ".git", "mvnw", "gradlew", "pom.xml", "build.gradle" }
 
       local root_dir = require("jdtls.setup").find_root(root_markers)

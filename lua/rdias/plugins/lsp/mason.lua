@@ -31,7 +31,7 @@ return {
         "html",
         "lua_ls",
         "graphql",
-        "tsserver",
+        "ts_ls",
         "jdtls",
         "marksman",
         "angularls",
