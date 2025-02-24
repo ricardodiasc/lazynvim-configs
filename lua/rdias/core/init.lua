@@ -1,4 +1,5 @@
 
+
 vim.g.nightflyTransparent = true
 
 vim.g.mapleader = ' '
@@ -101,3 +102,9 @@ vim.keymap.set('n', '<Leader>bp', ':bp<Return>')
 --
 
 
+
+
+
+-- Complete
+
+vim.opt.completeopt = { 'menuone', 'noselect', 'noinsert' }
