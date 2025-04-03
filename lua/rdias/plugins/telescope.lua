@@ -14,6 +14,18 @@ return {
     local trouble = require("trouble.providers.telescope")
 
     telescope.setup {
+      pickers = {
+        buffers = {
+          mappings = {
+            i = {
+              ["<c-d>"] = actions.delete_buffer
+            },
+            n = {
+              ["<c-d>"] = actions.delete_buffer
+            }
+          }
+        }
+      },
       defaults = {
         mappings = {
           i = {
