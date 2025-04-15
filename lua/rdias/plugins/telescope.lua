@@ -25,6 +25,9 @@ return {
           }
         }
       },
+      extensions = {
+        fzf = {}
+      },
       defaults = {
         mappings = {
           i = {
