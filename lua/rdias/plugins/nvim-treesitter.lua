@@ -38,6 +38,7 @@ return {
         "query",
         "java",
         "rust",
+        "python",
         "cpp",
         "c",
         "help",

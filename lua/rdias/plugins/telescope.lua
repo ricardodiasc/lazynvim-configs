@@ -11,7 +11,6 @@ return {
     local telescope = require("telescope")
     local source = require("trouble.sources.telescope")
     local actions = require("telescope.actions")
-    local trouble = require("trouble.providers.telescope")
 
     telescope.setup {
       pickers = {
