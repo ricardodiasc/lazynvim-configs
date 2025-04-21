@@ -21,7 +21,6 @@ return {
       local LOMBOK_PATH = JDTLS_LOCATION .. '/lombok.jar'
       local WORKSPACE_PATH = HOME .. "/workspace/temp/"
 
-
       -- Only for Linux and Mac
       local SYSTEM = "linux"
       if vim.fn.has "mac" == 1 then
@@ -95,11 +94,11 @@ return {
               runtimes = {
                 {
                   name = "JavaSE-11",
-                  path = HOME .. "/.sdkman/candidates/java/11.0.23-tem",
+                  path = HOME .. "/.sdkman/candidates/java/11.0.27-tem",
                 },
                 {
                   name = "JavaSE-17",
-                  path = HOME .. "/.sdkman/candidates/java/17.0.10-tem",
+                  path = HOME .. "/.sdkman/candidates/java/17.0.27-librca",
                 },
                 {
                   name = "JavaSE-19",
