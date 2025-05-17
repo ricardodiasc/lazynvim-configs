@@ -10,7 +10,7 @@ return {
   opts = {
     automatic_installation = true,
     handlers = {},
-    ensire_installed = {
+    ensure_installed = {
       "nvim-dap",
       "nvim-dap-ui",
       "nvim-dap-virtual-text",
