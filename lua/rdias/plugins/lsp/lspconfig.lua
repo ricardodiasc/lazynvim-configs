@@ -104,7 +104,15 @@ return {
             globals = { "vim" },
           },
           workspace = {
-            library = vim.api.nvim_get_runtime_file("",true),
+
+            library = {
+                      vim.env.VIMRUNTIME
+                      -- Depending on the usage, you might want to add additional paths
+                      -- here.
+                      -- '${3rd}/luv/library'
+                      -- '${3rd}/busted/library'
+                    },
+            -- library = vim.api.nvim_get_runtime_file("",true),
             checkThirdParty = false
           },
           telemetry = {
@@ -146,6 +154,11 @@ return {
       on_attach = on_attach,
     })
 
+    lspconfig["pyright"].setup({
+      capabilities = capabilities,
+      on_attach = on_attach,
+      filetypes = {"python"}
+    })
 
     -- lspconfig["jdtls"].setup({
     --   capabilities = capabilities,

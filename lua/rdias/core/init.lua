@@ -1,5 +1,3 @@
-
-
 vim.g.nightflyTransparent = true
 
 vim.g.mapleader = ' '
@@ -26,7 +24,10 @@ vim.opt.cmdheight = 1
 vim.opt.laststatus = 2
 vim.opt.expandtab = true
 vim.opt.scrolloff = 10
-vim.opt.shell = 'zsh'
+
+if vim.fn.executable('zsh') == 1  then
+  vim.opt.shell = 'zsh'
+end
 
 
 vim.opt.backupskip = { '/tmp/*', '/private/tmp/*' }
@@ -76,7 +77,7 @@ vim.keymap.set('n', 'te', ':tabedit<Return>')
 vim.keymap.set('n', 'ss', ':split<Return><C-w>w')
 vim.keymap.set('n', 'sv', ':vsplit<Return><C-w>w')
 vim.keymap.set('n', 'tc', ':tabclose<Return>')
-vim.keymap.set('n', '<Tab>', ':tabnext<Return>')
+-- vim.keymap.set('n', '<Tab>', ':tabnext<Return>')
 
 vim.keymap.set('n', '<Leader>bd', ':bd<Return>')
 vim.keymap.set('n', '<Leader>bn', ':bn<Return>')
