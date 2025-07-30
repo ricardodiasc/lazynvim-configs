@@ -50,16 +50,16 @@ return {
     })
 
 
-    -- mason_tool_installer.setup({
-    --   ensure_installed = {
-    --     "black",
-    --     "debugpy",
-    --     "flake8",
-    --     "isort",
-    --     "mypy",
-    --     "pylint",
-    --   },
-    -- })
+    mason_tool_installer.setup({
+      ensure_installed = {
+        "black",
+        "debugpy",
+        "flake8",
+        -- "isort",
+        "mypy",
+        "pylint",
+      },
+    })
 
   end,
 }
