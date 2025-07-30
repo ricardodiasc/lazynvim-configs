@@ -51,3 +51,13 @@ That's it, relaunch nvim and you are good to go 😄
 
 Note: If you inspect the manson-receipt.json you fill find explicit references to the jar files that point to the previous versions. It should be ok if you don't modify those because the plugin that uses them utilises a glob expression.
 
+
+### Python
+
+Add a new section on mason.lua configuration. 
+
+Pre-requisites:
+
+- Python and 
+- sudo apt install python3.12-venv
+
