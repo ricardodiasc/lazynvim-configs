@@ -98,7 +98,7 @@ return {
                 },
                 {
                   name = "JavaSE-17",
-                  path = HOME .. "/.sdkman/candidates/java/17.0.27-librca",
+                  path = HOME .. "/.sdkman/candidates/java/17.0.16-librca",
                 },
                 {
                   name = "JavaSE-19",
