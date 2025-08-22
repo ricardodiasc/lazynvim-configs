@@ -11,7 +11,6 @@ return {
   },
   config = function()
     local jdtls = require("jdtls")
-
     local function attach_jdtls()
       local JDTLS_LOCATION = vim.fn.stdpath "data" .. "/mason/packages/jdtls"
       local JAVA_DAP_LOCATION = vim.fn.stdpath "data" .. "/mason/packages/java-debug-adapter/extension/server/"
