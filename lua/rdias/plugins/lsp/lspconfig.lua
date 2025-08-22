@@ -48,7 +48,7 @@ return {
     end
 
     -- Enable autocompletion
-    local capabilities = cmp_nvim_lsp.default_capabilities()
+    -- local capabilities = cmp_nvim_lsp.default_capabilities()
 
     local signs = { Error = " ", Warning = " ", Hint = " ", Information = " " }
 
@@ -56,109 +56,111 @@ return {
       local hl = "DiagnosticsSign" .. type
       vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
     end
-    lspconfig["html"].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-      filetypes = { "html" },
-      init_options = {
-        configurationSection = { "html", "css", "javascript" },
-        embeddedLanguages = {
-          ss = true,
-          javascript = true,
-        },
-      },
-    })
 
-    lspconfig["ts_ls"].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-      filetypes = { "javascript", "typescript", "typescriptreact", "typescript.tsc" },
-      cmd = { "typescript-language-server", "--stdio" },
-    })
+    -- lspconfig["html"].setup({
+    --   capabilities = capabilities,
+    --   on_attach = on_attach,
+    --   filetypes = { "html" },
+    --   init_options = {
+    --     configurationSection = { "html", "css", "javascript" },
+    --     embeddedLanguages = {
+    --       ss = true,
+    --       javascript = true,
+    --     },
+    --   },
+    -- })
 
-    lspconfig["cssls"].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-    })
+    -- lspconfig["ts_ls"].setup({
+    --   capabilities = capabilities,
+    --   on_attach = on_attach,
+    --   filetypes = { "javascript", "typescript", "typescriptreact", "typescript.tsc" },
+    --   cmd = { "typescript-language-server", "--stdio" },
+    -- })
 
-    lspconfig["tailwindcss"].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-    })
+    --
+    -- lspconfig["cssls"].setup({
+    --   capabilities = capabilities,
+    --   on_attach = on_attach,
+    -- })
+    --
+    -- lspconfig["tailwindcss"].setup({
+    --   capabilities = capabilities,
+    --   on_attach = on_attach,
+    -- })
+    --
+    -- lspconfig["emmet_ls"].setup({
+    --   capabilities = capabilities,
+    --   on_attach = on_attach,
+    --   filetypes = { "html", "typecriptreact", "javascriptreact", "css", "sass", "less" }
+    -- })
 
-    lspconfig["emmet_ls"].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-      filetypes = { "html", "typecriptreact", "javascriptreact", "css", "sass", "less" }
-    })
+    -- lspconfig["lua_ls"].setup({
+    --   capabilities = capabilities,
+    --   on_attach = on_attach,
+    --   settings = {
+    --     Lua = {
+    --       runtime = {
+    --         version = 'LuaJIT'
+    --       },
+    --       diagnostics = {
+    --         globals = { "vim" },
+    --       },
+    --       workspace = {
+    --
+    --         library = {
+    --                   vim.env.VIMRUNTIME
+    --                   -- Depending on the usage, you might want to add additional paths
+    --                   -- here.
+    --                   -- '${3rd}/luv/library'
+    --                   -- '${3rd}/busted/library'
+    --                 },
+    --         -- library = vim.api.nvim_get_runtime_file("",true),
+    --         checkThirdParty = false
+    --       },
+    --       telemetry = {
+    --         enable = true
+    --       }
+    --     },
+    --   },
+    -- })
 
-    lspconfig["lua_ls"].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-      settings = {
-        Lua = {
-          runtime = {
-            version = 'LuaJIT'
-          },
-          diagnostics = {
-            globals = { "vim" },
-          },
-          workspace = {
-
-            library = {
-                      vim.env.VIMRUNTIME
-                      -- Depending on the usage, you might want to add additional paths
-                      -- here.
-                      -- '${3rd}/luv/library'
-                      -- '${3rd}/busted/library'
-                    },
-            -- library = vim.api.nvim_get_runtime_file("",true),
-            checkThirdParty = false
-          },
-          telemetry = {
-            enable = true
-          }
-        },
-      },
-    })
-
-    lspconfig["graphql"].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-      filetypes = { "graphql", "gql" }
-    })
-
-    lspconfig["jsonls"].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-    })
-
-    lspconfig["yamlls"].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-    })
-
-    lspconfig["dockerls"].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-    })
-
-    lspconfig["angularls"].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-    })
-
-
-    lspconfig["terraformls"].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-    })
-
-    lspconfig["pyright"].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-      filetypes = {"python"}
-    })
+    -- lspconfig["graphql"].setup({
+    --   capabilities = capabilities,
+    --   on_attach = on_attach,
+    --   filetypes = { "graphql", "gql" }
+    -- })
+    --
+    -- lspconfig["jsonls"].setup({
+    --   capabilities = capabilities,
+    --   on_attach = on_attach,
+    -- })
+    --
+    -- lspconfig["yamlls"].setup({
+    --   capabilities = capabilities,
+    --   on_attach = on_attach,
+    -- })
+    --
+    -- lspconfig["dockerls"].setup({
+    --   capabilities = capabilities,
+    --   on_attach = on_attach,
+    -- })
+    --
+    -- lspconfig["angularls"].setup({
+    --   capabilities = capabilities,
+    --   on_attach = on_attach,
+    -- })
+    --
+    --
+    -- lspconfig["terraformls"].setup({
+    --   capabilities = capabilities,
+    --   on_attach = on_attach,
+    -- })
+    --
+    -- lspconfig["pyright"].setup({
+    --   capabilities = capabilities,
+    --   on_attach = on_attach,
+    --   filetypes = {"python"}
+    -- })
 
     -- lspconfig["jdtls"].setup({
     --   capabilities = capabilities,

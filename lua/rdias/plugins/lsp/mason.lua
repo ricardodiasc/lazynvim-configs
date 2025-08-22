@@ -47,6 +47,12 @@ return {
         "pyright"
       },
       automatic_installation = true,
+      -- automatic_setup = false,
+      automatic_enable = {
+        exclude = {
+            "jdtls"
+        }
+      }
     })
 
 
