@@ -16,7 +16,7 @@ return {
 
     local opts = { noremap = true, silent = true }
 
-    local on_attach = function (_client, bufnr)
+    -- local on_attach = function (_client, bufnr)
       opts.buffer = bufnr
       opts.desc = "Show LSP declaration"
       keymap.set("n", "<leader>lD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
@@ -45,7 +45,7 @@ return {
 
       opts.desc = "Show LSP declaration"
       keymap.set("n", "<leader>ld", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-    end
+    -- end
 
     -- Enable autocompletion
     -- local capabilities = cmp_nvim_lsp.default_capabilities()

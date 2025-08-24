@@ -293,6 +293,9 @@ return {
     end
 
     attach_jdtls()
+
+    local java_filetypes = { "java" }
+
     vim.api.nvim_create_autocmd("FileType", {
       pattern = java_filetypes,
       callback = attach_jdtls,
