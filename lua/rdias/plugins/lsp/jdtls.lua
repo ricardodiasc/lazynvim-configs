@@ -292,8 +292,6 @@ return {
       keymap.set('n', 'gR', ':lua show_dap_repl()<CR>')
     end
 
-    attach_jdtls()
-
     local java_filetypes = { "java" }
 
     vim.api.nvim_create_autocmd("FileType", {
