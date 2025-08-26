@@ -1,3 +1,8 @@
+vim.g.java_ignore_html = 0
+vim.g.java_ignore_markdown = 0
+
+
+
 vim.g.nightflyTransparent = true
 
 vim.g.mapleader = ' '
