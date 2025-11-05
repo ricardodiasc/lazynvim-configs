@@ -12,10 +12,11 @@ return {
     }
 
     local keymap = vim.keymap
-    keymap.set('n', '<leader>xx', '<cmd>TroubleToggle<cr>')
-    keymap.set('n', '<leader>xw', '<cmd>TroubleToggle workspace_diagnostics<cr>')
-    keymap.set('n', '<leader>xd', '<cmd>TroubleToggle document_diagnostics<cr>')
-    keymap.set('n', '<leader>xl', '<cmd>TroubleToggle loclist<cr>')
+    keymap.set('n', '<leader>xx', '<cmd>Trouble diagnostics toggle<cr>')
+    keymap.set('n', '<leader>xw', '<cmd>Trouble workspace_diagnostics<cr>')
+    keymap.set('n', '<leader>xd', '<cmd>Trouble diagnostics toggle fulter.buf=0 <cr>')
+    keymap.set('n', '<leader>xl', '<cmd>Trouble loclist toggle<cr>')
+    keymap.set('n', "<leader>xp", "<cmp>lua vim.diagnostic.open_float()<CR>", { noremap = true, silent = true })
 
   end,
 }

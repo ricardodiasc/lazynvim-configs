@@ -9,8 +9,8 @@ return {
     {"antosha417/nvim-lsp-file-operations", config = true },
   },
   config = function ()
-    local lspconfig = require("lspconfig")
-    local cmp_nvim_lsp = require("cmp_nvim_lsp")
+    -- Enable virtual text diagnostics
+    vim.diagnostic.config({ virtual_text = true })
 
     local keymap = vim.keymap
 
@@ -43,6 +43,9 @@ return {
       opts.desc = "Format code."
       keymap.set("n","<leader>lf", "<cmd>lua vim.lsp.buf.format()<CR>", opts)
 
+      opts.desc = "Format selected code."
+      keymap.set("v","<leader>lf", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
+
       opts.desc = "Show LSP declaration"
       keymap.set("n", "<leader>ld", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
     -- end
@@ -56,120 +59,6 @@ return {
       local hl = "DiagnosticsSign" .. type
       vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
     end
-
-    -- lspconfig["html"].setup({
-    --   capabilities = capabilities,
-    --   on_attach = on_attach,
-    --   filetypes = { "html" },
-    --   init_options = {
-    --     configurationSection = { "html", "css", "javascript" },
-    --     embeddedLanguages = {
-    --       ss = true,
-    --       javascript = true,
-    --     },
-    --   },
-    -- })
-
-    -- lspconfig["ts_ls"].setup({
-    --   capabilities = capabilities,
-    --   on_attach = on_attach,
-    --   filetypes = { "javascript", "typescript", "typescriptreact", "typescript.tsc" },
-    --   cmd = { "typescript-language-server", "--stdio" },
-    -- })
-
-    --
-    -- lspconfig["cssls"].setup({
-    --   capabilities = capabilities,
-    --   on_attach = on_attach,
-    -- })
-    --
-    -- lspconfig["tailwindcss"].setup({
-    --   capabilities = capabilities,
-    --   on_attach = on_attach,
-    -- })
-    --
-    -- lspconfig["emmet_ls"].setup({
-    --   capabilities = capabilities,
-    --   on_attach = on_attach,
-    --   filetypes = { "html", "typecriptreact", "javascriptreact", "css", "sass", "less" }
-    -- })
-
-    -- lspconfig["lua_ls"].setup({
-    --   capabilities = capabilities,
-    --   on_attach = on_attach,
-    --   settings = {
-    --     Lua = {
-    --       runtime = {
-    --         version = 'LuaJIT'
-    --       },
-    --       diagnostics = {
-    --         globals = { "vim" },
-    --       },
-    --       workspace = {
-    --
-    --         library = {
-    --                   vim.env.VIMRUNTIME
-    --                   -- Depending on the usage, you might want to add additional paths
-    --                   -- here.
-    --                   -- '${3rd}/luv/library'
-    --                   -- '${3rd}/busted/library'
-    --                 },
-    --         -- library = vim.api.nvim_get_runtime_file("",true),
-    --         checkThirdParty = false
-    --       },
-    --       telemetry = {
-    --         enable = true
-    --       }
-    --     },
-    --   },
-    -- })
-
-    -- lspconfig["graphql"].setup({
-    --   capabilities = capabilities,
-    --   on_attach = on_attach,
-    --   filetypes = { "graphql", "gql" }
-    -- })
-    --
-    -- lspconfig["jsonls"].setup({
-    --   capabilities = capabilities,
-    --   on_attach = on_attach,
-    -- })
-    --
-    -- lspconfig["yamlls"].setup({
-    --   capabilities = capabilities,
-    --   on_attach = on_attach,
-    -- })
-    --
-    -- lspconfig["dockerls"].setup({
-    --   capabilities = capabilities,
-    --   on_attach = on_attach,
-    -- })
-    --
-    -- lspconfig["angularls"].setup({
-    --   capabilities = capabilities,
-    --   on_attach = on_attach,
-    -- })
-    --
-    --
-    -- lspconfig["terraformls"].setup({
-    --   capabilities = capabilities,
-    --   on_attach = on_attach,
-    -- })
-    --
-    -- lspconfig["pyright"].setup({
-    --   capabilities = capabilities,
-    --   on_attach = on_attach,
-    --   filetypes = {"python"}
-    -- })
-
-    -- lspconfig["jdtls"].setup({
-    --   capabilities = capabilities,
-    --   on_attach = on_attach,
-    --   filetypes = { "java" },
-    --   root_dir = function(fname)
-    --     return lspconfig.util.root_pattern("pom.xml", "gradle.build", ".git")(fname) or vim.fn.getcwd()
-    --   end,
-    -- })
 
   end
 }

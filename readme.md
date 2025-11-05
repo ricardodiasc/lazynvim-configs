@@ -54,10 +54,16 @@ Note: If you inspect the manson-receipt.json you fill find explicit references t
 
 ### Python
 
-Add a new section on mason.lua configuration. 
+Add a new section on mason.lua configuration.  e
 
 Pre-requisites:
 
 - Python and 
 - sudo apt install python3.12-venv
 
+
+
+### TODO
+
+- Fix issue for code snippets for Java files
+- Format only the selected code on visual mode 
