@@ -1,3 +1,24 @@
+
+local diff_with_branch_prompt = function()
+  -- Use vim.ui.input to open a dialog and get user input
+  vim.ui.input({
+    prompt = "Enter branch/revision to diff against (e.g., main, HEAD~1): ",
+    default = "develop" -- Optional default value
+  }, function(input)
+    -- This callback function is executed after the user presses Enter
+
+    -- 'input' is the string the user typed
+    if input and input ~= '' then
+      -- Execute the Gitsigns diffthis command with the user's input
+      vim.cmd("Gitsigns diffthis " .. input)
+    else
+      -- Optional: Handle case where user cancels or enters empty string
+      vim.notify("Diff cancelled or no revision entered", vim.log.levels.INFO)
+    end
+  end)
+end
+
+
 return {
   "lewis6991/gitsigns.nvim",
   event = { "BufReadPre", "BufNewFile" },
@@ -24,5 +45,8 @@ return {
     keymap.set("n", "<leader>gr", "<cmd>lua require('gitsigns').reset_hunk()<CR>", opts)
     opts.desc = "Preview hunk."
     keymap.set("n", "<leader>gP", "<cmd>lua require('gitsigns').preview_hunk()<CR>", opts)
+
+    opts.desc = "Compare with another branch."
+    keymap.set("n", "<leader>gc", diff_with_branch_prompt, opts)
   end
 }

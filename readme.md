@@ -67,3 +67,4 @@ Pre-requisites:
 
 - Fix issue for code snippets for Java files
 - Format only the selected code on visual mode 
+- Add a way to map sdkman java version in the environment
