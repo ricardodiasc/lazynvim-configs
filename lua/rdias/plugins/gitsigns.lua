@@ -1,21 +1,33 @@
 
 local diff_with_branch_prompt = function()
-  -- Use vim.ui.input to open a dialog and get user input
-  vim.ui.input({
-    prompt = "Enter branch/revision to diff against (e.g., main, HEAD~1): ",
-    default = "develop" -- Optional default value
-  }, function(input)
-    -- This callback function is executed after the user presses Enter
+  local actions = require("telescope.actions")
+  local finders = require("telescope.finders")
+  local pickers = require("telescope.pickers")
+  local sorters = require("telescope.sorters")
 
-    -- 'input' is the string the user typed
-    if input and input ~= '' then
-      -- Execute the Gitsigns diffthis command with the user's input
-      vim.cmd("Gitsigns diffthis " .. input)
-    else
-      -- Optional: Handle case where user cancels or enters empty string
-      vim.notify("Diff cancelled or no revision entered", vim.log.levels.INFO)
-    end
-  end)
+  local branches = vim.fn.systemlist({ "git", "branch", "--format=%(refname:short)" })
+  if vim.v.shell_error ~= 0 then
+    vim.notify("Error getting git branches", vim.log.levels.ERROR)
+    return
+  end
+
+  pickers.new({}, {
+    prompt_title = "Select Branch to Diff Against",
+    finder = finders.new_table({
+      results = branches,
+    }),
+    sorter = sorters.get_generic_fuzzy_sorter(),
+    attach_mappings = function(prompt_bufnr, map)
+      actions.select_default:replace(function()
+        local selection = require("telescope.actions.state").get_selected_entry()
+        actions.close(prompt_bufnr)
+        if selection and selection[1] then
+          vim.cmd("Gitsigns diffthis " .. selection[1])
+        end
+      end)
+      return true
+    end,
+  }):find()
 end
 
 
