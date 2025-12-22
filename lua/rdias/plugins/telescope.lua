@@ -62,5 +62,6 @@ return {
     keymap.set("n", "<Leader>ft", "<cmd>Telescope treesitter<cr>")
     keymap.set("n", "<Leader>fo", "<cmd>Telescope oldfiles<cr>")
     keymap.set("n", "<Leader>fw", "<cmd>Telescope grep_string<cr>")
+    keymap.set("n", "<leader>cd", "<cmd>CompareFile<cr>", { desc = "Compare with file" })
   end
 }
