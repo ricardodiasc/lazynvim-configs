@@ -2,6 +2,10 @@ return {
   "nvim-treesitter/nvim-treesitter",
   event = { "BufReadPre", "BufNewFile" },
   build = ":TSUpdate",
+  dependencies = {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    "windwp/nvim-ts-autotag",
+  },
   config = function ()
     local treesitter = require("nvim-treesitter.configs")
 
@@ -55,6 +59,23 @@ return {
           scope_incremental = false,
           node_decremental = "<bs>",
         },
+      },
+      textobjects = {
+        select = {
+          enable = true,
+          lookahead = true,
+          keymaps = {
+            -- Check textobjects.scm
+            ["a="] = { query = "@assignment.outer", desc = "Select outer part of assignment" },
+          },
+        },
+        move = {
+          enable = true,
+          set_jumps = true,
+          goto_next_start = {
+              ["]f"] = { query = "@call.outer", desc = "Next function call start" },
+          }
+        }
       }
     })
   end
