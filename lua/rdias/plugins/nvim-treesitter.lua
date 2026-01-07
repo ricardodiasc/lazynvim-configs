@@ -3,8 +3,8 @@ return {
   event = { "BufReadPre", "BufNewFile" },
   build = ":TSUpdate",
   dependencies = {
-    "nvim-treesitter/nvim-treesitter-textobjects",
-    "windwp/nvim-ts-autotag",
+    { "nvim-treesitter/nvim-treesitter-textobjects", lazy = true },
+    { "windwp/nvim-ts-autotag", lazy = true },
   },
   config = function ()
     local treesitter = require("nvim-treesitter.configs")
