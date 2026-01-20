@@ -170,10 +170,10 @@ return {
 
       -- local JAVA_DAP_LOCATION = vim.fn.stdpath "data" .. "/mason/packages/java-debug-adapter/extension/server/"
       local bundles = {
-        vim.fn.glob(JAVA_DAP_LOCATION .. "com.microsoft.java.debug.plugin-*.jar", 1)
-      } 
+        vim.fn.glob(JAVA_DAP_LOCATION .. "com.microsoft.java.debug.plugin-*.jar", false)
+      }
 
-      vim.list_extend(bundles, vim.split(vim.fn.glob(JAVA_TEST_LOCATION .. "*.jar", 1), "\n"))
+      vim.list_extend(bundles, vim.split(vim.fn.glob(JAVA_TEST_LOCATION .. "*.jar", false), "\n"))
 
       config["init_options"] = {
         bundles = bundles;
