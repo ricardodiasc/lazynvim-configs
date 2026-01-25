@@ -13,7 +13,6 @@ M.compare_to_current = function(opts)
               actions.close(prompt_bufnr)
               local selection = action_state.get_selected_entry()
               local selected_file = selection.path
-              
               -- Open vertical diff split with the selected file
               vim.cmd('vertical diffsplit ' .. vim.fn.fnameescape(selected_file))
           end)

@@ -1,8 +1,6 @@
 vim.g.java_ignore_html = 0
 vim.g.java_ignore_markdown = 0
 
-
-
 vim.g.nightflyTransparent = true
 
 vim.g.mapleader = ' '
@@ -35,6 +33,9 @@ if vim.fn.executable('zsh') == 1  then
   vim.opt.shell = 'zsh'
 end
 
+
+vim.opt.undofile = true
+vim.opt.signcolumn = 'yes'
 
 vim.opt.backupskip = { '/tmp/*', '/private/tmp/*' }
 vim.opt.inccommand = 'split'
