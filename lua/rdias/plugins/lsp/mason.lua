@@ -37,6 +37,7 @@ return {
         "graphql",
         "ts_ls",
         "jdtls",
+        "groovyls",
         "marksman",
         "angularls",
         "jsonls",

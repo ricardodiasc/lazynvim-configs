@@ -16,39 +16,36 @@ return {
 
     local opts = { noremap = true, silent = true }
 
-    -- local on_attach = function (_client, bufnr)
-      opts.buffer = bufnr
-      opts.desc = "Show LSP declaration"
-      keymap.set("n", "<leader>lD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-      opts.desc = "Show declaration location."
-      keymap.set("n","<leader>lD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-      opts.desc = "Show definitions."
-      keymap.set("n","<leader>ld", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-      opts.desc = "Show documentations."
-      keymap.set("n","<leader>lk", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-      opts.desc = "Show implementations of the type."
-      keymap.set("n","<leader>li", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-      opts.desc = "Show signature help."
-      keymap.set("n","<leader>ls", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
-      opts.desc = "Show type definition."
-      keymap.set("n","<leader>lt", "<cmd>lua vi.lsp.buf.type_definition()<CR>", opts)
-      opts.desc = "Rename."
-      keymap.set("n","<leader>lr", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-      opts.desc = "Show code actions."
-      keymap.set("n","<leader>la", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-      opts.desc = "Show references."
-      keymap.set("n","<leader>lq", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-      opts.desc = "Go to next diagnostic."
-      keymap.set("n","<leader>ln", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
-      opts.desc = "Format code."
-      keymap.set("n","<leader>lf", "<cmd>lua vim.lsp.buf.format()<CR>", opts)
+    opts.desc = "Show LSP declaration"
+    keymap.set("n", "<leader>lD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
+    opts.desc = "Show declaration location."
+    keymap.set("n","<leader>lD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
+    opts.desc = "Show definitions."
+    keymap.set("n","<leader>ld", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
+    opts.desc = "Show documentations."
+    keymap.set("n","<leader>lk", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
+    opts.desc = "Show implementations of the type."
+    keymap.set("n","<leader>li", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
+    opts.desc = "Show signature help."
+    keymap.set("n","<leader>ls", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
+    opts.desc = "Show type definition."
+    keymap.set("n","<leader>lt", "<cmd>lua vi.lsp.buf.type_definition()<CR>", opts)
+    opts.desc = "Rename."
+    keymap.set("n","<leader>lr", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+    opts.desc = "Show code actions."
+    keymap.set("n","<leader>la", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+    opts.desc = "Show references."
+    keymap.set("n","<leader>lq", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
+    opts.desc = "Go to next diagnostic."
+    keymap.set("n","<leader>ln", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
+    opts.desc = "Format code."
+    keymap.set("n","<leader>lf", "<cmd>lua vim.lsp.buf.format()<CR>", opts)
 
-      opts.desc = "Format selected code."
-      keymap.set("v","<leader>lf", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
+    opts.desc = "Format selected code."
+    keymap.set("v","<leader>lf", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
 
-      opts.desc = "Show LSP declaration"
-      keymap.set("n", "<leader>ld", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-    -- end
+    opts.desc = "Show LSP declaration"
+    keymap.set("n", "<leader>ld", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
 
     -- Enable autocompletion
     -- local capabilities = cmp_nvim_lsp.default_capabilities()
