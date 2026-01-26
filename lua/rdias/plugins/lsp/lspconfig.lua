@@ -57,5 +57,22 @@ return {
       vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
     end
 
+    -- local lspconfig = require("lspconfig")
+    --
+    -- lspconfig.groovyls.setup({
+    --   -- Optional: customize cmd if not using Mason (Mason usually handles this)
+    --   -- cmd = { "java", "-jar", "/path/to/groovy-language-server-all.jar" },
+    --   root_dir = lspconfig.util.root_pattern(".git", "build.gradle", "Jenkinsfile"),
+    --   settings = {
+    --     groovy = {
+    --       classpath = {
+    --         -- Update these paths to point to your shared library src/vars
+    --         "/path/to/your/cloned/shared-library/src",
+    --         "/path/to/your/cloned/shared-library/vars"
+    --       }
+    --     }
+    --   }
+    -- })
+
   end
 }
