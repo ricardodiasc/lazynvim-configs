@@ -25,6 +25,7 @@ return {
         "json",
         "javascript",
         "typescript",
+        "groovy",
         "tsx",
         "yaml",
         "html",
