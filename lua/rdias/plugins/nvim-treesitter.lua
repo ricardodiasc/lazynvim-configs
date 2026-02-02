@@ -40,6 +40,7 @@ return {
         "gitignore",
         "query",
         "java",
+        "kotlin",
         "rust",
         "python",
         "cpp",
@@ -50,8 +51,8 @@ return {
         "vimdoc",
         "hcl",
         "terraform",
-        "http",
-        "json"
+        "starlark",
+        "http"
       },
       incremental_selection = {
         enable = true,
