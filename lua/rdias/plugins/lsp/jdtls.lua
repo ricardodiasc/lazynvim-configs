@@ -57,7 +57,6 @@ return {
       jdtls.extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
       local extendedClientCapabilities = jdtls.extendedClientCapabilities;
 
-
       local config = {
         cmd = {
           "java",
