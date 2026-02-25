@@ -112,6 +112,7 @@ vim.keymap.set('n', '<Leader>bp', ':bp<Return>')
 
 
 vim.filetype.add { extension = { tfvar = "terraform" } }
+vim.filetype.add { extension = { tfvars = "terraform" } }
 vim.filetype.add { extension = { tfstate = "json" } }
 
 
