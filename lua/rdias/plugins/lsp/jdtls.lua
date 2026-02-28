@@ -26,21 +26,24 @@ return {
         SYSTEM = "mac"
       end
 
-      local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
-      local split_folder_name = vim.split(vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h"), "/", {trimempty = true})
-
-      -- vim.split(vim.fn.fnamemode(vim.fn.getcwd(), ":p:h"), "/",{trimempty=true} )
-      if #split_folder_name < 3 then
-        print("Debug propose: Java root not found")
-        return
-      end
-      local project_id = split_folder_name[#split_folder_name-2] .. "/" .. split_folder_name[#split_folder_name-1]
-
       local root_markers = { ".git", "mvnw", "gradlew", "pom.xml", "build.gradle" }
-
       local root_dir = require("jdtls.setup").find_root(root_markers)
 
-      -- local WORKSPACE_PATH = root_dir .. "/.workspace/"
+      if root_dir == "" then
+        print("Java root not found")
+        return
+      end
+
+      local project_name = vim.fn.fnamemodify(root_dir, ":p:h:t")
+      local root_dir_split = vim.split(root_dir, "/", { trimempty = true })
+      local project_id = ""
+      if #root_dir_split >= 2 then
+        project_id = root_dir_split[#root_dir_split - 1]
+      end
+      if #root_dir_split >= 3 then
+        project_id = root_dir_split[#root_dir_split - 2] .. "/" .. project_id
+      end
+
       local workspace_dir = WORKSPACE_PATH .. "/" .. project_id .. "/" .. project_name
 
       -- create the folder if .project does not exists
@@ -48,14 +51,10 @@ return {
         vim.fn.mkdir(workspace_dir, "p")
       end
 
-      if root_dir == "" then
-        print("Debug propose: Java root not found")
-        return
-      end
-
-
-      jdtls.extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
       local extendedClientCapabilities = jdtls.extendedClientCapabilities;
+      extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
+
+      local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
       local config = {
         cmd = {
@@ -81,6 +80,7 @@ return {
         },
 
         root_dir = root_dir,
+        capabilities = capabilities,
 
         settings = {
           java = {
