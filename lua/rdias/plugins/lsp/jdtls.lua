@@ -56,6 +56,43 @@ return {
 
       local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
+      local function get_sdkman_runtimes()
+        local sdkman_java_dir = HOME .. "/.sdkman/candidates/java"
+        local runtimes = {}
+        local java_dirs = vim.fn.glob(sdkman_java_dir .. "/*", false, true)
+
+        -- Map to store the best candidate for each major version
+        local major_map = {}
+
+        for _, dir in ipairs(java_dirs) do
+          if not dir:match("current$") then
+            local version = vim.fn.fnamemodify(dir, ":t")
+            local major = version:match("^(%d+)")
+            if major then
+              -- Convert major to number for better comparison/sorting if needed
+              -- For now, just prefer the "latest" version string found for that major
+              if not major_map[major] or version > major_map[major].version then
+                major_map[major] = {
+                  name = "JavaSE-" .. major,
+                  path = dir,
+                  version = version
+                }
+              end
+            end
+          end
+        end
+
+        -- Convert map back to list
+        for _, runtime in pairs(major_map) do
+          table.insert(runtimes, {
+            name = runtime.name,
+            path = runtime.path,
+          })
+        end
+
+        return runtimes
+      end
+
       local config = {
         cmd = {
           "java",
@@ -89,28 +126,7 @@ return {
             },
             configuration = {
               updateBuildConfiguration = "interactive",
-              runtimes = {
-                {
-                  name = "JavaSE-11",
-                  path = HOME .. "/.sdkman/candidates/java/11.0.27-tem",
-                },
-                {
-                  name = "JavaSE-17",
-                  path = HOME .. "/.sdkman/candidates/java/17.0.16-librca",
-                },
-                {
-                  name = "JavaSE-19",
-                  path = HOME .. "/.sdkman/candidates/java/19-tem",
-                },
-                {
-                  name = "JavaSE-20",
-                  path = HOME .. "/.sdkman/candidates/java/20-tem",
-                },
-                {
-                  name = "JavaSE-21",
-                  path = HOME .. "/.sdkman/candidates/java/21-tem",
-                }
-              }
+              runtimes = get_sdkman_runtimes()
             },
             maven = {
               downloadSources = true,
