@@ -66,5 +66,5 @@ Pre-requisites:
 ### TODO
 
 - [x] Fix issue for code snippets for Java files (added custom LuaSnip snippets in lua/rdias/snippets/)
-- Format only the selected code on visual mode 
-- Add a way to map sdkman java version in the environment
+- [x] Format only the selected code on visual mode 
+- [x] Add a way to map sdkman java version in the environment

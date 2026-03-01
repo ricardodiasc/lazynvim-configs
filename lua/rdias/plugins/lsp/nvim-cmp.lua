@@ -21,6 +21,14 @@ return {
     require("luasnip.loaders.from_lua").lazy_load({ paths = { vim.fn.stdpath("config") .. "/lua/rdias/snippets" } })
 
     cmp.setup({
+      filetype = {
+        ["sql"] = {
+          sources = cmp.config.sources({
+            { name = "buffer" },
+            { name = "vim-dadbod-completion" }
+          }),
+        }
+      },
       completion = {
         completeopt = "menu,menuone,preview,noselect",
       },

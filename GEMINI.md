@@ -33,6 +33,7 @@ The configuration uses a variety of popular and powerful plugins, including:
 The configuration is also set up for a variety of languages, including:
 
 *   HTML
+*   Java
 *   CSS
 *   JavaScript
 *   TypeScript
