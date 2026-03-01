@@ -29,7 +29,7 @@ return {
     opts.desc = "Show signature help."
     keymap.set("n","<leader>ls", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
     opts.desc = "Show type definition."
-    keymap.set("n","<leader>lt", "<cmd>lua vi.lsp.buf.type_definition()<CR>", opts)
+    keymap.set("n","<leader>lt", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
     opts.desc = "Rename."
     keymap.set("n","<leader>lr", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
     opts.desc = "Show code actions."
@@ -42,7 +42,9 @@ return {
     keymap.set("n","<leader>lf", "<cmd>lua vim.lsp.buf.format()<CR>", opts)
 
     opts.desc = "Format selected code."
-    keymap.set("v","<leader>lf", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
+    keymap.set("v", "<leader>lf", function()
+      vim.lsp.buf.format({ range = true })
+    end, opts)
 
     opts.desc = "Show LSP declaration"
     keymap.set("n", "<leader>ld", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
