@@ -34,6 +34,42 @@ return {
         return
       end
 
+      -- Detect whether the project uses Maven or Gradle (Maven takes priority)
+      local function detect_build_tool()
+        local has_mvnw = vim.fn.filereadable(root_dir .. "/mvnw") == 1
+        local has_pom = vim.fn.filereadable(root_dir .. "/pom.xml") == 1
+        local has_gradlew = vim.fn.filereadable(root_dir .. "/gradlew") == 1
+        local has_build_gradle = vim.fn.filereadable(root_dir .. "/build.gradle") == 1
+            or vim.fn.filereadable(root_dir .. "/build.gradle.kts") == 1
+
+        if has_mvnw or has_pom then
+          return "maven"
+        elseif has_gradlew or has_build_gradle then
+          return "gradle"
+        end
+        return nil
+      end
+
+      -- Return the executable command for the detected build tool
+      local function get_build_cmd()
+        local build_tool = detect_build_tool()
+        if build_tool == "maven" then
+          if vim.fn.filereadable(root_dir .. "/mvnw") == 1 then
+            return "./mvnw"
+          end
+          return "mvn"
+        elseif build_tool == "gradle" then
+          if vim.fn.filereadable(root_dir .. "/gradlew") == 1 then
+            return "./gradlew"
+          end
+          return "gradle"
+        end
+        return nil
+      end
+
+      local build_tool = detect_build_tool()
+      local build_cmd = get_build_cmd()
+
       local project_name = vim.fn.fnamemodify(root_dir, ":p:h:t")
       local root_dir_split = vim.split(root_dir, "/", { trimempty = true })
       local project_id = ""
@@ -225,25 +261,66 @@ return {
       -- Existing server will be reused if the root_dir matches.
       jdtls.start_or_attach(config)
       -- not need to require("jdtls.setup").add_commands(), start automatically adds commands
+
       function get_spring_boot_runner(profile, debug)
-        local debug_param = ""
-
-        if (debug) then
-          debug_param = " --debug-jvm "
+        if not build_cmd then
+          print("No build tool detected (Maven or Gradle)")
+          return nil
         end
 
-        local profile_param = ""
-        if (profile) then
-          profile_param = " --args=\"--spring.profiles.active=" .. profile .. "\" "
-        end
+        if build_tool == "gradle" then
+          local debug_param = ""
+          if debug then
+            debug_param = " --debug-jvm"
+          end
+          local profile_param = ""
+          if profile then
+            profile_param = ' --args="--spring.profiles.active=' .. profile .. '"'
+          end
+          return build_cmd .. " bootRun" .. debug_param .. profile_param
 
-        return "./gradlew bootRun " .. debug_param .. profile_param
+        elseif build_tool == "maven" then
+          local debug_param = ""
+          if debug then
+            debug_param = ' -Dspring-boot.run.jvmArguments="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005"'
+          end
+          local profile_param = ""
+          if profile then
+            profile_param = " -Dspring-boot.run.profiles=" .. profile
+          end
+          return build_cmd .. " spring-boot:run" .. debug_param .. profile_param
+        end
+      end
+
+      function build_project()
+        if not build_cmd then
+          print("No build tool detected (Maven or Gradle)")
+          return
+        end
+        if build_tool == "gradle" then
+          vim.cmd("TermExec cmd='" .. build_cmd .. " build'")
+        elseif build_tool == "maven" then
+          vim.cmd("TermExec cmd='" .. build_cmd .. " package'")
+        end
+      end
+
+      function clean_build_project()
+        if not build_cmd then
+          print("No build tool detected (Maven or Gradle)")
+          return
+        end
+        if build_tool == "gradle" then
+          vim.cmd("TermExec cmd='" .. build_cmd .. " clean build'")
+        elseif build_tool == "maven" then
+          vim.cmd("TermExec cmd='" .. build_cmd .. " clean package'")
+        end
       end
 
       function run_spring_boot(debug)
-        -- vim.cmd('term ' .. get_spring_boot_runner('local', debug))
-        vim.cmd("TermExec cmd='" .. get_spring_boot_runner('local', debug) .. "' ")
-        -- vim.api.nvim_set_keymap("n", "<cmd>TermExec cmd='" .. get_spring_boot_runner() .. ";exit' <CR>", {noremap = true, silent = true})
+        local cmd = get_spring_boot_runner('local', debug)
+        if cmd then
+          vim.cmd("TermExec cmd='" .. cmd .. "'")
+        end
       end
 
       function attach_to_debug()
@@ -273,6 +350,9 @@ return {
       keymap.set('n', '<Leader>joi', ':lua require("jdtls").organize_imports()<CR>')
       keymap.set('n', '<Leader>jc', ':lua require("jdtls").compile("incremental")<CR>')
       keymap.set('n', '<Leader>jsr', function() run_spring_boot() end)
+
+      keymap.set('n', '<Leader>jb', function() build_project() end)
+      keymap.set('n', '<Leader>jB', function() clean_build_project() end)
 
       keymap.set('n', '<F9>', function() run_spring_boot(false) end)
       keymap.set('n', '<F10>', function() run_spring_boot(true) end)
