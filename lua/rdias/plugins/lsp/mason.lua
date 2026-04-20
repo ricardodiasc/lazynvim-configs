@@ -45,7 +45,8 @@ return {
         "dockerls",
         "docker_compose_language_service",
         "terraformls",
-        "pyright"
+        "pyright",
+        "gopls"
       },
       automatic_installation = true,
       -- automatic_setup = false,
@@ -65,6 +66,8 @@ return {
         -- "isort",
         "mypy",
         "pylint",
+        "java-debug-adapter",
+        "java-test",
       },
     })
 
