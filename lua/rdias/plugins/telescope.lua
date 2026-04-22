@@ -1,6 +1,6 @@
 return {
   "nvim-telescope/telescope.nvim",
-  branch = "0.1.x",
+  -- branch = "0.1.x",
   requires = {
     "nvim-lua/plenary.nvim",
     "nvim-tree/nvim-web-devicons",

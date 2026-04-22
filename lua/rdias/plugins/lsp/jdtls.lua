@@ -4,7 +4,8 @@ return {
   dependencies = {
     "mfussenegger/nvim-dap",
     "rcarriga/nvim-dap-ui",
-    "nvim/nvim-lspconfig",
+    "neovim/nvim-lspconfig",
+    "hrsh7th/cmp-nvim-lsp",
     "nvim-telescope/telescope-dap.nvim",
     "nvim-telescope/telescope-file-browser.nvim",
     "theHamsta/nvim-dap-virtual-text"
@@ -18,7 +19,7 @@ return {
 
       local HOME = os.getenv("HOME")
       local LOMBOK_PATH = JDTLS_LOCATION .. '/lombok.jar'
-      local WORKSPACE_PATH = HOME .. "/workspace/temp/"
+      local WORKSPACE_PATH = HOME .. "/workspace/temp"
 
       -- Only for Linux and Mac
       local SYSTEM = "linux"
@@ -26,7 +27,7 @@ return {
         SYSTEM = "mac"
       end
 
-      local root_markers = { ".git", "mvnw", "gradlew", "pom.xml", "build.gradle" }
+      local root_markers = { "pom.xml", "build.gradle", "mvnw", "gradlew", ".git" }
       local root_dir = require("jdtls.setup").find_root(root_markers)
 
       if root_dir == "" then
@@ -71,18 +72,9 @@ return {
       local build_cmd = get_build_cmd()
 
       local project_name = vim.fn.fnamemodify(root_dir, ":p:h:t")
-      local root_dir_split = vim.split(root_dir, "/", { trimempty = true })
-      local project_id = ""
-      if #root_dir_split >= 2 then
-        project_id = root_dir_split[#root_dir_split - 1]
-      end
-      if #root_dir_split >= 3 then
-        project_id = root_dir_split[#root_dir_split - 2] .. "/" .. project_id
-      end
+      local workspace_dir = WORKSPACE_PATH .. "/" .. project_name
 
-      local workspace_dir = WORKSPACE_PATH .. "/" .. project_id .. "/" .. project_name
-
-      -- create the folder if .project does not exists
+      -- create the folder if it does not exist
       if not vim.fn.isdirectory(workspace_dir) then
         vim.fn.mkdir(workspace_dir, "p")
       end
@@ -95,6 +87,12 @@ return {
       local function get_sdkman_runtimes()
         local sdkman_java_dir = HOME .. "/.sdkman/candidates/java"
         local runtimes = {}
+        
+        -- Check if directory exists before globbing
+        if vim.fn.isdirectory(sdkman_java_dir) == 0 then
+          return nil
+        end
+
         local java_dirs = vim.fn.glob(sdkman_java_dir .. "/*", false, true)
 
         -- Map to store the best candidate for each major version
@@ -105,8 +103,6 @@ return {
             local version = vim.fn.fnamemodify(dir, ":t")
             local major = version:match("^(%d+)")
             if major then
-              -- Convert major to number for better comparison/sorting if needed
-              -- For now, just prefer the "latest" version string found for that major
               if not major_map[major] or version > major_map[major].version then
                 major_map[major] = {
                   name = "JavaSE-" .. major,
@@ -126,19 +122,21 @@ return {
           })
         end
 
-        return runtimes
+        return #runtimes > 0 and runtimes or nil
       end
 
       local config = {
         cmd = {
           "java",
           "-Declipse.application=org.eclipse.jdt.ls.core.id1",
-          "-Dsgi.bundles.defaultStartLevel=4",
+          "-Dosgi.bundles.defaultStartLevel=4",
           "-Declipse.product=org.eclipse.jdt.ls.core.product",
           "-Dlog.protocol=true",
           "-Dlog.level=ALL",
           "-javaagent:" .. LOMBOK_PATH,
           "-Xms1g",
+          "-Xmx2g",
+          "-Dsun.zip.disableMemoryMapping=true",
           "--add-modules=ALL-SYSTEM",
           "--add-opens",
           "java.base/java.util=ALL-UNNAMED",
@@ -161,12 +159,17 @@ return {
               downloadSources = true,
             },
             configuration = {
-              updateBuildConfiguration = "interactive",
+              updateBuildConfiguration = "automatic",
               runtimes = get_sdkman_runtimes()
             },
             maven = {
               downloadSources = true,
             },
+            import = {
+              maven = { enabled = true },
+              gradle = { enabled = true },
+            },
+            autobuild = { enabled = true },
             implementationscodeLens = {
               enabled = true,
             },
@@ -176,13 +179,13 @@ return {
             references = {
               includeDecompiledSources = true,
             },
-            format = {
-              enabled = true,
-              settings = {
-                url = "/home/ricardo/.local/share/eclipse/eclipse-java-google-style.xml",
-                profile = "GoogleStyle",
-              },
-            },
+            -- format = {
+            --   enabled = true,
+            --   settings = {
+            --     url = "/home/ricardo/.local/share/eclipse/eclipse-java-google-style.xml",
+            --     profile = "GoogleStyle",
+            --   },
+            -- },
           },
         },
         signatureHelp = { enable = true },
@@ -220,11 +223,18 @@ return {
       }
 
       -- local JAVA_DAP_LOCATION = vim.fn.stdpath "data" .. "/mason/packages/java-debug-adapter/extension/server/"
-      local bundles = {
-        vim.fn.glob(JAVA_DAP_LOCATION .. "com.microsoft.java.debug.plugin-*.jar", false)
-      }
+      -- Only include actual plugin jars as bundles. 
+      -- Helper jars like jacocoagent.jar or runner jars will crash JDT.LS if included here.
+      local bundles = {}
+      local dap_jar = vim.fn.glob(JAVA_DAP_LOCATION .. "com.microsoft.java.debug.plugin-*.jar", false)
+      if dap_jar ~= "" then
+        table.insert(bundles, dap_jar)
+      end
 
-      vim.list_extend(bundles, vim.split(vim.fn.glob(JAVA_TEST_LOCATION .. "*.jar", false), "\n"))
+      local test_bundle = vim.fn.glob(JAVA_TEST_LOCATION .. "com.microsoft.java.test.plugin-*.jar", false)
+      if test_bundle ~= "" then
+        table.insert(bundles, test_bundle)
+      end
 
       config["init_options"] = {
         bundles = bundles;
