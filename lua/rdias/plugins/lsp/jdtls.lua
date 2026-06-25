@@ -27,7 +27,7 @@ return {
         SYSTEM = "mac"
       end
 
-      local root_markers = { "pom.xml", "build.gradle", "mvnw", "gradlew", ".git" }
+      local root_markers = { ".git", "pom.xml", "build.gradle", "mvnw", "gradlew" }
       local root_dir = require("jdtls.setup").find_root(root_markers)
 
       if root_dir == "" then
